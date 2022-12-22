@@ -76,6 +76,17 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+
+/*?------ Forum Program css style -------*/
+
+.signup, .login {
+  text-decoration: none;
+}
+
+
+/*!------ END OF FORUM PROGRAM CSS ------*/ 
+
+
 *,
 *::before,
 *::after {
