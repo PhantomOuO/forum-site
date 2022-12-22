@@ -46,10 +46,48 @@
               <ul class="dropdown-menu dropdown-menu-end rounded-0" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item">ID：Admin</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">會員資料</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" >登入/註冊</a></li>
                 <li><a class="dropdown-item" href="#">我的文章</a></li>
                 <li><a class="dropdown-item" href="#">收藏文章</a></li>
               </ul>
+              <!--? Login Modal -->
+              <div class="modal fade " id="loginModal">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content rounded-4 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0 ">
+                      <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                      <h1 class="fw-bold mb-0 fs-2 ">會員登入</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+              
+                    <div class="modal-body p-5 pt-0">
+                      <form class="" method="post" action="login.php">
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                          <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                          <label for="floatingPassword">Password</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">登入</button>
+                        
+                        <div class="form-group">                          
+                          <input type="checkbox" class="remember">
+                          <small class="text-muted">記住我</small>                          
+                        </div>
+              
+                        <div class="modal-footer">                                                 
+                            <a href="#" type="button" class="member">註冊</a>
+                            <span>成為會員</span>
+                        </div>
+                        
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--! ---------- END OF MODAL ---------- !-->
             </li>
           </ul>
         </div>
