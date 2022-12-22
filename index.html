@@ -31,22 +31,20 @@
             程式語言論壇網
         </a>
 
-        <!-- 第一部份：手機版 -->
+        <!--? 第一部份：手機版 -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#linkbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- 第二部份：桌上型電腦版 -->
-
+        <!--? 第二部份：桌上型電腦版 -->
         <div class="collapse navbar-collapse justify-content-end" id="linkbar">
-          <!-- 列出內容 -->
+          <!--? Login dropdown  -->
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
               <ul class="dropdown-menu dropdown-menu-end rounded-0" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item">ID：Admin</a></li>
+                <li><a class="dropdown-item" href="#">ID：Admin</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" >登入/註冊</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">登入/註冊</a></li>
                 <li><a class="dropdown-item" href="#">我的文章</a></li>
                 <li><a class="dropdown-item" href="#">收藏文章</a></li>
               </ul>
@@ -56,39 +54,77 @@
                   <div class="modal-content rounded-4 shadow">
                     <!--? Header -->
                     <div class="modal-header p-5 pb-4 border-bottom-0 ">
-                      <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
                       <h1 class="fw-bold mb-0 fs-2 ">會員登入</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!--? Body -->
                     <div class="modal-body p-5 pt-0">
-                      <form class="" method="post" action="login.php">
+                      <form class="" method="POST" action="login.php">
                         <div class="form-floating mb-3">
-                          <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                          <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" name="useremail">
                           <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" name="userpassword">
                           <label for="floatingPassword">Password</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">登入</button>                        
-                        <div class="form-group">                          
-                          <input type="checkbox" class="remember">
-                          <small class="text-muted">記住我</small>                          
-                        </div>
                       </form>
-                        <!--? Footer -->
-                        <div class="modal-footer">                                                 
-                            <a href="#" type="button" class="member">註冊</a>
-                            <span>成為會員</span>
-                        </div>               
+                      <div class="form-group">                          
+                        <input type="checkbox" class="remember">
+                        <small class="text-muted">記住我</small>                          
+                      </div>                      
+                      <!--? Footer -->
+                      <div class="modal-footer">                                                 
+                        <a href="#" type="button" class="signup" data-bs-toggle="modal" data-bs-target="#signupModal">註冊</a>
+                        <span>成為會員</span>
+                      </div>               
                     </div>
                   </div>
                 </div>
               </div>
-              <!--! ---------- END OF MODAL ---------- !-->
+              <!--! ---------- END OF LOGIN MODAL ---------- !-->
+
+
+              <!--? Signup Modal -->
+              <div class="modal fade " id="signupModal">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content rounded-4 shadow">
+                    <!--? Header -->
+                    <div class="modal-header p-5 pb-4 border-bottom-0 ">
+                      <h1 class="fw-bold mb-0 fs-2 ">會員註冊</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!--? Body -->
+                    <div class="modal-body p-5 pt-0">
+                      <form class="" method="POST" action="signup.php">
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="text" name="username">
+                          <label for="floatingInput">User name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="email" name="useremail">
+                          <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="password" name="userpassword">
+                          <label for="floatingPassword">Password</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">註冊</button>
+                      </form>
+                      <!--? Footer -->
+                      <div class="modal-footer">                                                 
+                        <span>立即</span>
+                        <a href="#" type="button" class="login" data-bs-toggle="modal" data-bs-target="#loginModal">登入</a>
+                      </div>               
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--! ---------- END OF SIGNUP MODAL ---------- !-->
             </li>
           </ul>
+          <!--! ---------- END OF LOGIN DROPDOWN ---------- !-->
         </div>
       </div>
     </nav>
