@@ -60,11 +60,12 @@ include("connMySQL.php");
               <div class="modal fade " id="loginModal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content rounded-4 shadow">
+                    <!--? Header -->
                     <div class="modal-header p-5 pb-4 border-bottom-0 ">
                       <h1 class="fw-bold mb-0 fs-2 ">會員登入</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-              
+                    <!--? Body -->
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="post" action="login.php">
                         <div class="form-floating mb-3">
@@ -82,18 +83,53 @@ include("connMySQL.php");
                           <input type="checkbox" class="remember">
                           <small class="text-muted">記住我</small>                          
                         </div>
-              
+                        <!--? Footer -->
                         <div class="modal-footer">                                                 
-                            <a href="#" type="button" class="member text-decoration-none">註冊</a>
+                            <a href="#" type="button" class="signup text-decoration-none" data-bs-toggle="modal" data-bs-target="#signupModal">註冊</a>
                             <span>成為會員</span>
                         </div>
-                        
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- 登入彈窗 結束 -->
+              <!--? 註冊彈窗 -->
+              <div class="modal fade " id="signupModal">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content rounded-4 shadow">
+                    <!--? Header -->
+                    <div class="modal-header p-5 pb-4 border-bottom-0 ">
+                      <h1 class="fw-bold mb-0 fs-2 ">會員註冊</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!--? Body -->
+                    <div class="modal-body p-5 pt-0">
+                      <form class="" method="POST" action="signup.php">
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control rounded-3" id="floatingname" placeholder="text" name="username" required>
+                          <label for="floatingname">帳  號</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control rounded-3" id="floatingemail" placeholder="name@example.com"  required>
+                          <label for="floatingemail">信  箱</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" name="userpassword" required>
+                          <label for="floatingPassword">密  碼</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">註冊</button>
+                      </form>
+                      <!--? Footer -->
+                      <div class="modal-footer">                                                 
+                        <span>已有帳號?</span>
+                        <a href="#" type="button" class="login" data-bs-toggle="modal" data-bs-target="#loginModal">登入</a>
+                      </div>               
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--? 註冊彈窗 結束 -->
             </li>
           </ul>
         </div>
@@ -102,10 +138,10 @@ include("connMySQL.php");
     <div class="container mb-sm-4 vh-100  text-center">
       <div class="row px-4 vh-100">
         <div class="col-sm-2">
-         <div class="p-3 h-100  rounded-2 bg-light">Custom column padding</div>
+         <div class="p-3 h-100  rounded-2 bg-light">程式語言導覽列</div>
         </div>
         <div class="col-sm-10 ">
-          <div class="p-3 h-100  rounded-2 bg-light">Custom column padding</div>
+          <div class="p-3 h-100  rounded-2 bg-light">對應語言文章</div>
         </div>
       </div>
     </div>
