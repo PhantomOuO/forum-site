@@ -43,13 +43,16 @@ $result_articles_all = $db_link->query($SQLQuery_articles);
 $SQLQuery_articles_limit = $SQLQuery_articles . "LIMIT {$startRow_records},{$pageRow_records}";
 $result_articles_limit = $db_link->query($SQLQuery_articles_limit);
 
+//個別文章資料-資料庫搜尋 
+//$SQLQuery_showArticles = "SELECT * FROM articles WHERE article_id = {}";
+
 //計算總筆數
 $totoal_records = $result_articles_all->num_rows;
 //計算總頁數
 $totoal_pages = ceil($totoal_records / $pageRow_records);
 
-
 ?>
+
 <!doctype html>
 <html lang="zh-TW">
 
@@ -64,10 +67,14 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 
+
+</head>
+
 <body>
   <main>
     <nav class="navbar navbar-expand-lg mb-lg-4 navbar-light bg-primary2">
       <div class="container">
+
         <!-- 品牌logo -->
         <a class="navbar-brand text-white" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
@@ -76,10 +83,12 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
           </svg>
           程式語言論壇網 測試頁面
         </a>
+
         <!-- 第一部份：手機版 -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#linkbar">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <!-- 第二部份：桌上型電腦版 -->
         <div class="collapse navbar-collapse justify-content-end" id="linkbar">
           <!-- 下拉選項 -->
@@ -95,6 +104,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                 <li><a class="dropdown-item" href="#">我的文章</a></li>
                 <li><a class="dropdown-item" href="#">收藏文章</a></li>
               </ul>
+
               <!--? 登入彈窗 -->
               <div class="modal fade " id="loginModal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -132,6 +142,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                   </div>
                 </div>
               </div>
+
               <!-- 登入彈窗 結束 -->
               <!--? 註冊彈窗 -->
               <div class="modal fade " id="signupModal">
@@ -172,12 +183,15 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
             </li>
           </ul>
         </div>
+
       </div>
     </nav>
+
     <div class="container-md mb-lg-2">
       <div class="row px-4">
-        <!--左側看板島行列-->
-        <!--左側看板有時間補lg以下顯示下拉選單-->
+
+        <!-- 左側看板島行列 -->
+        <!-- 左側看板有時間補lg以下顯示下拉選單 -->
         <div class="col-lg-2">
           <div class="p-3 rounded-2 bg-light h-100">
             <div class="h5 text-primary2">看 板 列 表</div>
@@ -195,24 +209,50 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
             </nav>
           </div>
         </div>
-        <!--文章列-->
+
+        <!-- 右側容器 -->
         <div class="col-lg-10 ">
           <div class="p-3 h-100 rounded-2 bg-light">
             <div class="row justify-content-md-center">
-              <div class="d-flex flex-row-reverse mb-2">
-                <button type="button" class="btn btn-primary2 text-white float-right" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+
+              <!-- 新增文章按鈕 -->
+              <div class="col-lg-12 mb-2 d-md-flex justify-content-md-end">
+                <!--按鈕-->
+                <button type="button" class="btn btn-primary2 text-white" data-bs-toggle="modal" data-bs-target="#addArticle" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                   </svg>
                   新增文章
                 </button>
+                <!-- 新增文章彈窗 -->
+                <div class="modal fade " id="addArticle">
+                  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content rounded-4 shadow">
+                      <!-- Header -->
+                      <div class="modal-header p-5 pb-4 border-bottom-0 ">
+                        <h1 class="modal-title fw-bold mb-0 fs-2 ">標題</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <!-- Body -->
+                      <div class="modal-body p-5 pt-0">
+
+                        <!-- Footer -->
+                        <div class="modal-footer">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 新增文章彈窗 結束 -->
               </div>
 
-              <div class="row mb-2">
+              <!--文章-->
+              <div class="col-lg-12 mb-2">
                 <?php while ($row_result_articles = $result_articles_limit->fetch_assoc()) { ?>
                   <div class="col-md-12">
                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-150 position-relative">
-                      <div class="col p-4 d-flex flex-column position-static ">
+                      <div class="col p-4 d-flex flex-column position-static">
                         <div class="hstack gap-2">
                           <strong class="d-inline-block mb-2 text-warning">#<?php echo $row_result_articles["article_id"] ?></strong>
                           <strong class="d-inline-block mb-2 text-primary2">#<?php echo $row_result_articles["language_name"] ?></strong>
@@ -230,38 +270,108 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                           <div class="mb-1 text-muted">創建時間：<?php echo $row_result_articles["created_at"] ?></div>
                           <div class="mb-1 text-muted ">|</div>
                           <div class="mb-1 text-muted">最後修改時間：<?php echo $row_result_articles["updated_at"] ?></div>
-                          <a href="#" class="stretched-link ms-auto">
+                          <a class="stretched-link ms-auto" type="button" href="#" data-bs-toggle="modal" data-bs-target="#showArticle" data-bs-id="<?php echo $row_result_articles["article_id"] ?>" data-bs-lang="<?php echo $row_result_articles["language_name"] ?>" data-bs-tag="<?php echo $row_result_articles["tag_name"] ?>" data-bs-username="<?php echo $row_result_articles["username"] ?>" data-bs-title="<?php echo $row_result_articles["title"] ?>" data-bs-content="<?php echo $row_result_articles["content"] ?>" data-bs-createdAt="<?php echo $row_result_articles["created_at"] ?>" data-bs-updatedAt="<?php echo $row_result_articles["updated_at"] ?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand text-black" viewBox="0 0 16 16">
                               <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-                            </svg></a>
+                            </svg>
+                          </a>
                         </div>
                       </div>
                     </div>
                   </div>
                 <?php } ?>
-                <!-- while end-->
               </div>
-            </div>
-            <div class="row">
+
+              <!--文章彈窗-->
+              <div class="modal fade " id="showArticle">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                  <div class="modal-content rounded-4 shadow">
+                    <!-- Header -->
+                    <div class="modal-header p-5 pb-2 border-bottom-0 ">
+                      <h4 class="modal-title fw-bold mb-0 fs-2 ">標題</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body p-5 pt-0 " style="height:450px; ">
+                      <span class="article badge text-white text-bg-warning ">#文章編號</span>
+                      <span class="lang badge text-white text-bg-primary2">#語言類型</span>
+                      <span class="tag badge text-white text-bg-primary2">#文章類型</span>
+                      <hr>
+                      <p class="content fs-5"></p>
+                    </div>
+                    <!-- Footer -->
+                    <div class="modal-footer" style="height:50px;">
+                      <div class="spinner-grow spinner-grow-sm text-primary2" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      <div class="userName text-muted">發佈者：</div>
+                      <div class="createdAt text-muted">創建時間：</div>
+                      <div class="updatedAt text-muted">`最後修改時間：</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 文章彈窗 結束 -->
+
               <!--翻頁-->
-              <nav aria-label="Page navigation">
-                <ul class="pagination pagination-sm justify-content-center">
-                  <?php for ($i = 1; $i <= $totoal_pages; $i++) {
-                    if ($i == $num_pages) {
-                      echo "<li class='page-item ' aria-current='page'>
+              <div class="col-lg-12 ">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination pagination-sm justify-content-center">
+                    <?php for ($i = 1; $i <= $totoal_pages; $i++) {
+                      if ($i == $num_pages) {
+                        echo "<li class='page-item ' aria-current='page'>
                             <span class='page-link text-white bg-primary2' href='test.php?num_lang={$num_lang}&num_pages={$i}'>" . $i . "</span></li>";
-                    } else {
-                      echo "<li class='page-item'><a class='page-link'  href='test.php?num_lang={$num_lang}&num_pages={$i}'>" . $i . "</a></li>";
+                      } else {
+                        echo "<li class='page-item'><a class='page-link'  href='test.php?num_lang={$num_lang}&num_pages={$i}'>" . $i . "</a></li>";
+                      }
                     }
-                  }
-                  ?>
-                </ul>
-              </nav>
+                    ?>
+                  </ul>
+                </nav>
+              </div>
+
             </div>
           </div>
         </div>
+
       </div>
     </div>
+    <!-- 個別文章js-->
+    <script>
+      const showArticle = document.getElementById('showArticle')
+      showArticle.addEventListener('show.bs.modal', event => {
+        //觸發按鈕
+        const button = event.relatedTarget
+        //獲取data-bs 資料
+        const article_id = button.getAttribute('data-bs-id')
+        const username_id = button.getAttribute('data-bs-username')
+        const lang_id = button.getAttribute('data-bs-lang')
+        const tag_id = button.getAttribute('data-bs-tag')
+        const title = button.getAttribute('data-bs-title')
+        const content = button.getAttribute('data-bs-content')
+        const created_at = button.getAttribute('data-bs-createdat')
+        const updated_at = button.getAttribute('data-bs-updatedat')
+
+        const modalTitle = showArticle.querySelector('.modal-title')
+        const modalID = showArticle.querySelector('.modal-body span.article')
+        const modaLang = showArticle.querySelector('.modal-body span.lang')
+        const modaTag = showArticle.querySelector('.modal-body span.tag')
+        const modaContent = showArticle.querySelector('.modal-body p.content')
+        const modaUsername = showArticle.querySelector('.modal-footer div.userName')
+        const modaCreatedAt = showArticle.querySelector('.modal-footer div.createdAt')
+        const modaUpdatedAt = showArticle.querySelector('.modal-footer div.updatedAt')
+
+        modalTitle.textContent = title
+        modalID.textContent = `# ${article_id}`
+        modaLang.textContent = `# ${lang_id}`
+        modaTag.textContent = `# ${tag_id}`
+        modaContent.textContent = content
+        modaUsername.textContent = `發佈者： ${username_id} | `
+        modaCreatedAt.textContent = `創建時間： ${created_at} | `
+        modaUpdatedAt.textContent = `最後修改時間： ${updated_at}`
+
+      })
+    </script>
   </main>
 </body>
 
