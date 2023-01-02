@@ -69,12 +69,12 @@ include("connMySQL.php");
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="post" action="login.php">
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="Account" required>
+                          <input type="text" name="useraccount" class="form-control rounded-3" id="floatingInput" placeholder="Account" required>
                           <label for="floatingInput">帳  號</label>
 
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
+                          <input type="password" name="userpassword" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
                           <label for="floatingPassword">密  碼</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">登 入</button>
