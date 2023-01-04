@@ -2,6 +2,8 @@
 <?php
 include("connMySQL.php");
 
+session_start();
+
 //程式語言類別-資料庫搜尋 language:lang
 $SQLQuery_language = "SELECT * FROM language_type WHERE 1";
 $result_lang = $db_link->query($SQLQuery_language);
@@ -96,15 +98,27 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
               <ul class="dropdown-menu dropdown-menu-end rounded-0" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item">ID：Admin</a></li>
+                <li><a class="dropdown-item">
+                    <?php 
+                      if(isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
+                        echo "ID：" . $_SESSION["loginUserName"];} else {echo "尚未登入";}?>
+                  </a>
+                </li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">登入/註冊</a></li>
+                <li>
+                  <?php 
+                    if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")){
+                    echo "<a class='dropdown-item' href='logout.php?logout=true'>登出</a>";} 
+                    else {
+                    echo "<a class='dropdown-item' href='#' data-bs-toggle='modal' data-bs-target='#loginModal'>登入/註冊</a>";
+                  }
+                  ?>
+                </li>
                 <li><a class="dropdown-item" href="#">我的文章</a></li>
                 <li><a class="dropdown-item" href="#">收藏文章</a></li>
               </ul>
-
               <!--? 登入彈窗 -->
               <div class="modal fade " id="loginModal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -118,18 +132,18 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="post" action="login.php">
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="Account" required>
+                          <input type="text" name="inputname" class="form-control rounded-3" id="floatingInput" placeholder="Account" value="<?php if (isset($_COOKIE["remUser"])) {echo $_COOKIE["remUser"];} ?>" required>
                           <label for="floatingInput">帳 號</label>
 
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
+                          <input type="password" name="inputpasswd" class="form-control rounded-3" id="floatingPassword" placeholder="Password" value="<?php if (isset($_COOKIE["remPass"])) {echo $_COOKIE["remPass"];} ?>" required>
                           <label for="floatingPassword">密 碼</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">登 入</button>
 
                         <div class="form-group">
-                          <input type="checkbox" class="remember">
+                          <input name="rememberme" type="checkbox" class="remember" value="true">
                           <small class="text-muted">記住我</small>
                         </div>
                         <!--? Footer -->
@@ -142,8 +156,8 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                   </div>
                 </div>
               </div>
-
               <!-- 登入彈窗 結束 -->
+
               <!--? 註冊彈窗 -->
               <div class="modal fade " id="signupModal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -186,7 +200,17 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
 
       </div>
     </nav>
-
+    <!--? 登出彈窗 -->
+    <?php 
+    
+    ?>
+    <div class="position-relative me-4">
+      <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+      <div class="fs-5">您已登出程式語言論壇。</div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    <!--? 登出彈窗 結束 -->
     <div class="container-md mb-lg-2">
       <div class="row px-4">
 
@@ -194,7 +218,11 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         <!-- 左側看板有時間補lg以下顯示下拉選單 -->
         <div class="col-lg-2">
           <div class="p-3 rounded-2 bg-light h-100">
-            <div class="h5 text-primary2">看 板 列 表</div>
+            <div class="h5 text-primary2">看 板 列 表
+              <?php
+              ?>
+
+            </div>
             <nav class="nav flex-column ">
               <?php
               while ($row_result_lang = $result_lang->fetch_assoc()) {
