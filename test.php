@@ -8,6 +8,10 @@ session_start();
 $SQLQuery_language = "SELECT * FROM language_type WHERE 1";
 $result_lang = $db_link->query($SQLQuery_language);
 
+//程式標籤類別-資料庫搜尋 
+$SQLQuery_tags = "SELECT * FROM tags_type WHERE 1";
+$result_tags = $db_link->query($SQLQuery_tags);
+
 //用戶選擇看板文章-資料庫搜尋 
 //預設顯示程式看板 (預設lang_type:1 HTML)
 $num_lang = 1;
@@ -218,7 +222,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
       </div>
     <?php } ?>
     <!--? 登入錯誤訊息 -->
-     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] =="1")) { ?>
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "1")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
           <div class="fs-5">帳號或密碼輸入錯誤。</div>
@@ -227,7 +231,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
       </div>
     <?php } ?>
     <!--? 登入成功訊息 -->
-    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] =="2")) { ?>
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "2")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
           <div class="fs-5">會員 <?php echo $_SESSION["loginUserName"] ?>，登入成功 !</div>
@@ -295,9 +299,13 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                               <div class="form-floating">
                                 <select class="form-select bg-light" id="floatingSelectGrid" required>
                                   <option selected></option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  <?php
+                                  mysqli_data_seek($result_lang, 0);
+                                  while ($row_result_lang_ = $result_lang->fetch_assoc()) {
+                                    echo "<option value=' {$row_result_lang_2["language_id"]} '>" . $row_result_lang_["language_name"] . "</option>";
+                                  }
+
+                                  ?>
                                 </select>
                                 <label for="floatingSelectGrid">程式語言看板選擇</label>
                               </div>
@@ -307,9 +315,12 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                               <div class="form-floating">
                                 <select class="form-select bg-light" id="floatingSelectGrid" required>
                                   <option selected></option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  <?php
+                                  while ($row_result_tags = $result_tags->fetch_assoc()) {
+                                    echo "<option value=' {$row_result_lang_2["tag_id"]} '>" . $row_result_tags["tag_name"] . "</option>";
+                                  }
+
+                                  ?>
                                 </select>
                                 <label for="floatingSelectGrid">文章標籤選擇</label>
                               </div>
