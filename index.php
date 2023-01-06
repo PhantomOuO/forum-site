@@ -74,7 +74,7 @@ include("connMySQL.php");
 
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" name="userpassword" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
+                          <input type="password" name="userpasswd" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
                           <label for="floatingPassword">密  碼</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">登 入</button>
