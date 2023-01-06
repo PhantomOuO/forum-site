@@ -227,13 +227,13 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
               <?php
               while ($row_result_lang = $result_lang->fetch_assoc()) {
                 if ($row_result_lang["language_id"] == $num_lang) {
-                  echo "<a class='nav-link text-white bg-primary2 rounded active' href='test.php?num_lang= {$row_result_lang["language_id"]} '>" . $row_result_lang["language_name"] . "</a>";
+                  echo "<a class='nav-link fw-bold text-white bg-primary2 rounded active' href='test.php?num_lang= {$row_result_lang["language_id"]} '>" . $row_result_lang["language_name"] . "</a>";
                 } else {
                   echo "<a class='nav-link text-black ' href='test.php?num_lang= {$row_result_lang["language_id"]} '>" . $row_result_lang["language_name"] . "</a>";
                 }
               }
-              $db_link->close();
               ?>
+              
             </nav>
           </div>
         </div>
@@ -258,16 +258,54 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <div class="modal-content rounded-4 shadow">
                       <!-- Header -->
                       <div class="modal-header p-5 pb-4 border-bottom-0 ">
-                        <h1 class="modal-title fw-bold mb-0 fs-2 ">標題</h1>
+                        <h1 class="modal-title fw-bold mb-0 fs-2 ">新增文章</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <!-- Body -->
                       <div class="modal-body p-5 pt-0">
-
-                        <!-- Footer -->
-                        <div class="modal-footer">
-
-                        </div>
+                        <form class="" method="post" action="add.php">
+                          <div class="mb-3 ">
+                            <label for="exampleFormControlInput1" class="form-label">標 題</label>
+                            <input type="form-title" class="form-control bg-light" id="exampleFormControlInput1" minlength="5" maxlength="40" placeholder="請輸入標題... (最少5個字，最高40個字)" required>
+                          </div>
+                          <div class="row g-2 mb-2">
+                            <div class="col-md">
+                              <label for="exampleFormControlInput1" class="form-label">語言看板</label>
+                              <div class="form-floating">
+                                <select class="form-select bg-light" id="floatingSelectGrid" required>
+                                  <option selected></option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                                <label for="floatingSelectGrid">程式語言看板選擇</label>
+                              </div>
+                            </div>
+                            <div class="col-md">
+                              <label for="exampleFormControlInput1" class="form-label">文章標籤</label>
+                              <div class="form-floating">
+                                <select class="form-select bg-light" id="floatingSelectGrid" required>
+                                  <option selected></option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                                <label for="floatingSelectGrid">文章標籤選擇</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">內 容</label>
+                            <textarea class="form-control bg-light" id="exampleFormControlTextarea1" rows="3" style="height:400px;" placeholder="請輸入內文... (最少10個字，最高800個字)" minlength="10" maxlength="800" required></textarea>
+                          </div>
+                          <!-- Footer -->
+                          <div class="modal-footer">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <button class="btn btn-secondary me-md-2" type="reset">重 置</button>
+                              <button class="btn text-white btn-primary2" type="submit">送 出</button>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -293,7 +331,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                           </strong>
                         </div>
                         <h5 class="mb-0"><?php echo $row_result_articles["title"] ?></h5>
-                        <p class="card-text mb-auto"><?php echo mb_strimwidth($row_result_articles["content"], 0, 20) . " . . ." ?></p>
+                        <p class="card-text mb-auto"><?php echo mb_strimwidth($row_result_articles["content"], 0, 70) . " . . ." ?></p>
                         <div class="hstack gap-2">
                           <div class="mb-1 text-muted">創建時間：<?php echo $row_result_articles["created_at"] ?></div>
                           <div class="mb-1 text-muted ">|</div>
@@ -315,15 +353,15 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                   <div class="modal-content rounded-4 shadow">
                     <!-- Header -->
-                    <div class="modal-header p-5 pb-2 border-bottom-0 ">
-                      <h4 class="modal-title fw-bold mb-0 fs-2 ">標題</h1>
+                    <div class="modal-header p-5 pb-1 border-bottom-0">
+                      <h4 class="modal-title fs-2 fw-bold mb-0 me-2">標 題</h1>
+                        <span class="article badge text-white text-bg-warning me-1">#文章編號</span>
+                        <span class="lang badge text-white text-bg-primary2 me-1">#語言類型</span>
+                        <span class="tag badge text-white text-bg-primary2 me-1">#文章類型</span>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Body -->
-                    <div class="modal-body p-5 pt-0 " style="height:450px; ">
-                      <span class="article badge text-white text-bg-warning ">#文章編號</span>
-                      <span class="lang badge text-white text-bg-primary2">#語言類型</span>
-                      <span class="tag badge text-white text-bg-primary2">#文章類型</span>
+                    <div class="modal-body p-5 pt-0" style="height:450px; ">
                       <hr>
                       <p class="content fs-5"></p>
                     </div>
@@ -340,7 +378,6 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                 </div>
               </div>
               <!-- 文章彈窗 結束 -->
-
               <!--翻頁-->
               <div class="col-lg-12 ">
                 <nav aria-label="Page navigation">
@@ -381,9 +418,9 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         const updated_at = button.getAttribute('data-bs-updatedat')
 
         const modalTitle = showArticle.querySelector('.modal-title')
-        const modalID = showArticle.querySelector('.modal-body span.article')
-        const modaLang = showArticle.querySelector('.modal-body span.lang')
-        const modaTag = showArticle.querySelector('.modal-body span.tag')
+        const modalID = showArticle.querySelector('.modal-header span.article')
+        const modaLang = showArticle.querySelector('.modal-header span.lang')
+        const modaTag = showArticle.querySelector('.modal-header span.tag')
         const modaContent = showArticle.querySelector('.modal-body p.content')
         const modaUsername = showArticle.querySelector('.modal-footer div.userName')
         const modaCreatedAt = showArticle.querySelector('.modal-footer div.createdAt')
