@@ -99,19 +99,22 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
               <a class="nav-link dropdown-toggle text-white" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
               <ul class="dropdown-menu dropdown-menu-end rounded-0" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item">
-                    <?php 
-                      if(isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
-                        echo "ID：" . $_SESSION["loginUserName"];} else {echo "尚未登入";}?>
+                    <?php
+                    if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
+                      echo "ID：" . $_SESSION["loginUserName"];
+                    } else {
+                      echo "尚未登入";
+                    } ?>
                   </a>
                 </li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <?php 
-                    if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")){
-                    echo "<a class='dropdown-item' href='logout.php?logout=true'>登出</a>";} 
-                    else {
+                  <?php
+                  if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
+                    echo "<a class='dropdown-item' href='logout.php?logout=true'>登出</a>";
+                  } else {
                     echo "<a class='dropdown-item' href='#' data-bs-toggle='modal' data-bs-target='#loginModal'>登入/註冊</a>";
                   }
                   ?>
@@ -132,12 +135,16 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="post" action="login.php">
                         <div class="form-floating mb-3">
-                          <input type="text" name="inputname" class="form-control rounded-3" id="floatingInput" placeholder="Account" value="<?php if (isset($_COOKIE["remUser"])) {echo $_COOKIE["remUser"];} ?>" required>
+                          <input type="text" name="inputname" class="form-control rounded-3" id="floatingInput" placeholder="Account" value="<?php if (isset($_COOKIE["remUser"])) {
+                                                                                                                                                echo $_COOKIE["remUser"];
+                                                                                                                                              } ?>" required>
                           <label for="floatingInput">帳 號</label>
 
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" name="inputpasswd" class="form-control rounded-3" id="floatingPassword" placeholder="Password" value="<?php if (isset($_COOKIE["remPass"])) {echo $_COOKIE["remPass"];} ?>" required>
+                          <input type="password" name="inputpasswd" class="form-control rounded-3" id="floatingPassword" placeholder="Password" value="<?php if (isset($_COOKIE["remPass"])) {
+                                                                                                                                                          echo $_COOKIE["remPass"];
+                                                                                                                                                        } ?>" required>
                           <label for="floatingPassword">密 碼</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">登 入</button>
@@ -200,17 +207,35 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
 
       </div>
     </nav>
-    <!--? 登出彈窗 -->
-    <?php 
-    
-    ?>
-    <div class="position-relative me-4">
-      <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
-      <div class="fs-5">您已登出程式語言論壇。</div>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    <!--? 登出訊息 -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "0")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+          <div class="fs-5">您已登出程式語言論壇。</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       </div>
-    </div>
-    <!--? 登出彈窗 結束 -->
+    <?php } ?>
+    <!--? 登入錯誤訊息 -->
+     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] =="1")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+          <div class="fs-5">帳號或密碼輸入錯誤。</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 登入成功訊息 -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] =="2")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+          <div class="fs-5">會員 <?php echo $_SESSION["loginUserName"] ?>，登入成功 !</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+
     <div class="container-md mb-lg-2">
       <div class="row px-4">
 
@@ -218,11 +243,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         <!-- 左側看板有時間補lg以下顯示下拉選單 -->
         <div class="col-lg-2">
           <div class="p-3 rounded-2 bg-light h-100">
-            <div class="h5 text-primary2">看 板 列 表
-              <?php
-              ?>
-
-            </div>
+            <div class="h5 text-primary2">看 板 列 表 </div>
             <nav class="nav flex-column ">
               <?php
               while ($row_result_lang = $result_lang->fetch_assoc()) {
@@ -233,7 +254,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                 }
               }
               ?>
-              
+
             </nav>
           </div>
         </div>

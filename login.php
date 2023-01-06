@@ -1,5 +1,8 @@
 <?php
+/*
+Msg 0:登出 1:失敗 2:登入
 
+*/
 //* 連結資料庫
 include("connMySQL.php");
 
@@ -26,7 +29,7 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
     if ($_POST["inputpasswd"] == $password) {
         //* 設定session
         $_SESSION["loginUserName"] = "$username";
-        header("Location: test.php");
+        header("Location: test.php?Msg=2");
 
         //*Cookie
         if (isset($_POST["rememberme"]) && ($_POST["rememberme"] == "true")) {
@@ -40,7 +43,7 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
         }
 
     }else{
-        header("Location: test.php?errMsg={$_POST["inputpasswd"]}");
+        header("Location: test.php?Msg=1");
     }
 }
 
