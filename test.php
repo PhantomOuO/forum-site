@@ -139,22 +139,22 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="post" action="login.php">
                         <div class="form-floating mb-3">
-                          <input type="text" name="inputname" class="form-control rounded-3" id="floatingInput" placeholder="Account" value="<?php if (isset($_COOKIE["remUser"])) {
+                          <input type="text" name="inputname" class="form-control rounded-3 bg-light" id="loginUserName" placeholder="Account" value="<?php if (isset($_COOKIE["remUser"])) {
                                                                                                                                                 echo $_COOKIE["remUser"];
                                                                                                                                               } ?>" required>
-                          <label for="floatingInput">帳 號</label>
+                          <label for="loginUserName">帳 號</label>
 
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" name="inputpasswd" class="form-control rounded-3" id="floatingPassword" placeholder="Password" value="<?php if (isset($_COOKIE["remPass"])) {
+                          <input type="password" name="inputpasswd" class="form-control rounded-3 bg-light" id="loginPassword" placeholder="Password" value="<?php if (isset($_COOKIE["remPass"])) {
                                                                                                                                                           echo $_COOKIE["remPass"];
                                                                                                                                                         } ?>" required>
-                          <label for="floatingPassword">密 碼</label>
+                          <label for="loginPassword">密 碼</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">登 入</button>
 
                         <div class="form-group">
-                          <input name="rememberme" type="checkbox" class="remember" value="true">
+                          <input name="rememberme" type="checkbox" class="remember bg-light" value="true">
                           <small class="text-muted">記住我</small>
                         </div>
                         <!--? Footer -->
@@ -182,17 +182,23 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="POST" action="signup.php">
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control rounded-3" id="floatingname" placeholder="text" name="username" required>
-                          <label for="floatingname">帳 號</label>
+                          <input type="text" class="form-control rounded-3 bg-light" id="signupUserName" placeholder="text"  minlength="5" maxlength="15" name="username" required>
+                          <label for="signupUserName">帳 號</label>
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="email" class="form-control rounded-3" id="floatingemail" placeholder="name@example.com" required>
-                          <label for="floatingemail">信 箱</label>
+                          <input type="email" class="form-control rounded-3 bg-light" id="signupEmail" placeholder="name@example.com" name="useremail" required>
+                          <label for="signupEmail">信 箱</label>
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" name="userpassword" required>
-                          <label for="floatingPassword">密 碼</label>
+                          <input type="password" class="form-control rounded-3 bg-light" id="signupPassword" placeholder="Password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$" name="userpassword" required>
+                          <label for="signupPassword">密 碼</label>
                         </div>
+                        <div class="form-floating mb-3">
+                          <input  type="password" class="form-control rounded-3 bg-light" id="ConfirmSignupPassword" placeholder="Password" oninput="setCustomValidity('');" onchange="
+                          if(document.getElementById('signupPassword').value != document.getElementById('ConfirmSignupPassword').value){setCustomValidity('密碼不吻合');}" required>
+                          <label for="ConfirmSignupPassword">確 認 密 碼</label>
+                        </div>
+                        <input type="hidden" id="action" name="action" value="join">
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">註冊</button>
                       </form>
                       <!--? Footer -->
@@ -235,6 +241,24 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
       <div class="position-relative me-4">
         <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
           <div class="fs-5">會員 <?php echo $_SESSION["loginUserName"] ?>，登入成功 !</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 帳號已註冊訊息 -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "3")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+          <div class="fs-5">此帳號已被註冊，請直接登入。</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 註冊成功訊息 -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "4")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+          <div class="fs-5">會員 <?php echo $_GET["signName"] ?>，註冊成功 !</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>

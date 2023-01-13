@@ -1,8 +1,8 @@
 <?php
 /*
-Msg 0:登出 1:失敗 2:登入
-
+Msg 0:登出 1:登入失敗 2:登入成功 3:帳號已註冊 4:註冊成功
 */
+
 //* 連結資料庫
 include("connMySQL.php");
 
@@ -25,8 +25,8 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
     $result_RecLogin->close();
 
     //* 比對密碼， 若相同則登入成功
-    //*if (password_verify($_POST["inputpasswd"],$password)) {
-    if ($_POST["inputpasswd"] == $password) {
+    if (password_verify($_POST["inputpasswd"],$password)) {
+    //if ($_POST["inputpasswd"] == $password) {
         //* 設定session
         $_SESSION["loginUserName"] = "$username";
         header("Location: test.php?Msg=2");
@@ -43,7 +43,7 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
         }
 
     }else{
-        header("Location: test.php?Msg=1");
+        header("Location: test.php?Msg=1&pass={$_POST["inputpasswd"]}&passwd={$password}");
     }
 }
 
