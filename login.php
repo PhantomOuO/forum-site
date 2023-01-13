@@ -9,7 +9,7 @@ include("connMySQL.php");
 session_start();
 //* 檢查是否有登入，若有則重新導向index.php
 if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
-    header("Location: index.php");
+    header("Location: test.php");
 }
 //* 執行會員登錄
 if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
@@ -25,13 +25,13 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
     $result_RecLogin->close();
     //*檢查是否有資料
     if ($username == ""){
-        header("Location: index.php?Msg=5");
+        header("Location: test.php?Msg=5");
     }else{
         //* 比對密碼， 若相同則登入成功
         if (password_verify($_POST["inputpasswd"],$password)) {
             //* 設定session
             $_SESSION["loginUserName"] = "$username";
-            header("Location: index.php?Msg=2");
+            header("Location: test.php?Msg=2");
             //*Cookie
             if (isset($_POST["rememberme"]) && ($_POST["rememberme"] == "true")) {
                 setcookie("remUser", $_POST["inputname"], time()+365*24*60);
@@ -43,7 +43,7 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
                 }
             }
         }else{
-            header("Location: index.php?Msg=1");
+            header("Location: test.php?Msg=1");
         }
     }
 }

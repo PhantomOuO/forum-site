@@ -13,7 +13,7 @@ if (isset($_POST["action"]) && ($_POST["action"] == "join")) {
 
     //判斷帳號是否已被註冊(比數若大於0則已被註冊)
     if ($result_RecFindUser -> num_rows > 0) {
-        header("Location: index.php?Msg=3");
+        header("Location: test.php?Msg=3");
     }else {//執行新增帳號
         $SQLQuery_insert = "INSERT INTO members (username, password, email) VALUES (?, ?, ?)";
         $result_insert = $db_link -> prepare($SQLQuery_insert);
@@ -21,7 +21,7 @@ if (isset($_POST["action"]) && ($_POST["action"] == "join")) {
         $result_insert -> execute();
         $result_insert -> close();
         $db_link -> close();
-        header("Location: index.php?Msg=4&signName={$_POST['username']}");
+        header("Location: test.php?Msg=4&signName={$_POST['username']}");
     }
 }
 ?>
