@@ -1,6 +1,6 @@
 <?php
 /*
-Msg 0:登出 1:登入失敗 2:登入成功 3:帳號已註冊 4:註冊成功
+Msg 0:登出 1:登入失敗 2:登入成功 3:帳號已註冊 4:註冊成功 5:帳號未註冊
 */
 
 //* 連結資料庫
@@ -23,28 +23,27 @@ if (isset($_POST["inputname"]) && isset($_POST["inputpasswd"])) {
     $result_RecLogin->bind_result($username, $password);
     $result_RecLogin->fetch();
     $result_RecLogin->close();
-
-    //* 比對密碼， 若相同則登入成功
-    if (password_verify($_POST["inputpasswd"],$password)) {
-    //if ($_POST["inputpasswd"] == $password) {
-        //* 設定session
-        $_SESSION["loginUserName"] = "$username";
-        header("Location: test.php?Msg=2");
-
-        //*Cookie
-        if (isset($_POST["rememberme"]) && ($_POST["rememberme"] == "true")) {
-            setcookie("remUser", $_POST["inputname"], time()+365*24*60);
-            setcookie("remPass", $_POST["inputpasswd"], time()+365*24*60);
-        } else {
-            if(isset($_COOKIE["remUser"])){
-                setcookie("remUser", $_POST["inputname"], time()-100);
-                setcookie("remPass", $_POST["inputpasswd"], time()-100);
-            }
-        }
-
+    //*檢查是否有資料
+    if ($username == ""){
+        header("Location: test.php?Msg=5");
     }else{
-        header("Location: test.php?Msg=1&pass={$_POST["inputpasswd"]}&passwd={$password}");
+        //* 比對密碼， 若相同則登入成功
+        if (password_verify($_POST["inputpasswd"],$password)) {
+            //* 設定session
+            $_SESSION["loginUserName"] = "$username";
+            header("Location: test.php?Msg=2");
+            //*Cookie
+            if (isset($_POST["rememberme"]) && ($_POST["rememberme"] == "true")) {
+                setcookie("remUser", $_POST["inputname"], time()+365*24*60);
+                setcookie("remPass", $_POST["inputpasswd"], time()+365*24*60);
+            } else {
+                if(isset($_COOKIE["remUser"])){
+                    setcookie("remUser", $_POST["inputname"], time()-100);
+                    setcookie("remPass", $_POST["inputpasswd"], time()-100);
+                }
+            }
+        }else{
+            header("Location: test.php?Msg=1");
+        }
     }
 }
-
-?>

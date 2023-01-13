@@ -102,7 +102,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
               <ul class="dropdown-menu dropdown-menu-end rounded-0" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item">
+                <li><a class="dropdown-item ">
                     <?php
                     if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
                       echo "ID：" . $_SESSION["loginUserName"];
@@ -140,15 +140,15 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                       <form class="" method="post" action="login.php">
                         <div class="form-floating mb-3">
                           <input type="text" name="inputname" class="form-control rounded-3 bg-light" id="loginUserName" placeholder="Account" value="<?php if (isset($_COOKIE["remUser"])) {
-                                                                                                                                                echo $_COOKIE["remUser"];
-                                                                                                                                              } ?>" required>
+                                                                                                                                                        echo $_COOKIE["remUser"];
+                                                                                                                                                      } ?>" required>
                           <label for="loginUserName">帳 號</label>
 
                         </div>
                         <div class="form-floating mb-3">
                           <input type="password" name="inputpasswd" class="form-control rounded-3 bg-light" id="loginPassword" placeholder="Password" value="<?php if (isset($_COOKIE["remPass"])) {
-                                                                                                                                                          echo $_COOKIE["remPass"];
-                                                                                                                                                        } ?>" required>
+                                                                                                                                                                echo $_COOKIE["remPass"];
+                                                                                                                                                              } ?>" required>
                           <label for="loginPassword">密 碼</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary2" type="submit">登 入</button>
@@ -182,7 +182,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <div class="modal-body p-5 pt-0">
                       <form class="" method="POST" action="signup.php">
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control rounded-3 bg-light" id="signupUserName" placeholder="text"  minlength="5" maxlength="15" name="username" required>
+                          <input type="text" class="form-control rounded-3 bg-light" id="signupUserName" placeholder="text" minlength="5" maxlength="15" name="username" required>
                           <label for="signupUserName">帳 號</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -194,7 +194,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                           <label for="signupPassword">密 碼</label>
                         </div>
                         <div class="form-floating mb-3">
-                          <input  type="password" class="form-control rounded-3 bg-light" id="ConfirmSignupPassword" placeholder="Password" oninput="setCustomValidity('');" onchange="
+                          <input type="password" class="form-control rounded-3 bg-light" id="ConfirmSignupPassword" placeholder="Password" oninput="setCustomValidity('');" onchange="
                           if(document.getElementById('signupPassword').value != document.getElementById('ConfirmSignupPassword').value){setCustomValidity('密碼不吻合');}" required>
                           <label for="ConfirmSignupPassword">確 認 密 碼</label>
                         </div>
@@ -221,7 +221,11 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
     <!--? 登出訊息 -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "0")) { ?>
       <div class="position-relative me-4">
-        <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+        <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-dash me-2" viewBox="0 0 16 16">
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+          </svg>
           <div class="fs-5">您已登出程式語言論壇。</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -230,7 +234,11 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
     <!--? 登入錯誤訊息 -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "1")) { ?>
       <div class="position-relative me-4">
-        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-x me-2" viewBox="0 0 16 16">
+            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z" />
+          </svg>
           <div class="fs-5">帳號或密碼輸入錯誤。</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -239,8 +247,12 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
     <!--? 登入成功訊息 -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "2")) { ?>
       <div class="position-relative me-4">
-        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
-          <div class="fs-5">會員 <?php echo $_SESSION["loginUserName"] ?>，登入成功 !</div>
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-check me-2" viewBox="0 0 16 16">
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+          </svg>
+          <div class="fs-5">會員<strong> <?php echo $_SESSION["loginUserName"] ?></strong>，登入成功 !</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>
@@ -248,8 +260,12 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
     <!--? 帳號已註冊訊息 -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "3")) { ?>
       <div class="position-relative me-4">
-        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
-          <div class="fs-5">此帳號已被註冊，請直接登入。</div>
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-exclamation me-2" viewBox="0 0 16 16">
+            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+            <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5Zm0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z" />
+          </svg>
+          <div class="fs-5">此帳號已被註冊。</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>
@@ -257,8 +273,25 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
     <!--? 註冊成功訊息 -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "4")) { ?>
       <div class="position-relative me-4">
-        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert">
-          <div class="fs-5">會員 <?php echo $_GET["signName"] ?>，註冊成功 !</div>
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-add me-2" viewBox="0 0 16 16">
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+          </svg>
+          <div class="fs-5">會員<strong> <?php echo $_GET["signName"] ?></strong>，註冊成功 !</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 帳號已註冊訊息 -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "5")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-exclamation me-2" viewBox="0 0 16 16">
+            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+            <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5Zm0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z" />
+          </svg>
+          <div class="fs-5">此帳號未被註冊。</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>
