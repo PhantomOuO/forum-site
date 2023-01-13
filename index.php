@@ -61,9 +61,10 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
 
 <!doctype html>
 <html lang="zh-TW">
+
 <head>
   <title>程式語言論壇網</title>
-  <link rel = "icon" href ="./images/favicon.ico" type = "image/x-icon">
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -100,8 +101,8 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
-              <ul class="dropdown-menu dropdown-menu-end rounded-0" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item ">
+              <ul class="dropdown-menu dropdown-menu-end rounded-0 mt-2 bg-primary2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item text-white fw-bold">
                     <?php
                     if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
                       echo "ID：" . $_SESSION["loginUserName"];
@@ -111,19 +112,20 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider">
+                  <hr class="dropdown-divider ">
                 </li>
                 <li>
                   <?php
                   if (isset($_SESSION["loginUserName"]) && ($_SESSION["loginUserName"] != "")) {
-                    echo "<a class='dropdown-item' href='logout.php?logout=true'>登出</a>";
+                    echo "<a class='dropdown-item text-white' href='logout.php?logout=true'>登出</a>";
                   } else {
-                    echo "<a class='dropdown-item' href='#' data-bs-toggle='modal' data-bs-target='#loginModal'>登入/註冊</a>";
+                    echo "<a class='dropdown-item text-white' href='' data-bs-toggle='modal' data-bs-target='#loginModal'>登入/註冊</a>";
                   }
                   ?>
                 </li>
-                <li><a class="dropdown-item" href="#">我的文章</a></li>
-                <li><a class="dropdown-item" href="#">收藏文章</a></li>
+                <li><a class="dropdown-item text-white" href="">我的文章</a></li>
+                <li><a class="dropdown-item text-white" href="">收藏文章</a></li>
+                <li><a class="dropdown-item text-white" href="">個人資料</a></li>
               </ul>
               <!--? 登入彈窗 -->
               <div class="modal fade " id="loginModal">
@@ -215,7 +217,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
       </div>
     </nav>
 
-    <!--? 登出訊息 -->
+    <!--? 登出訊息(Msg：0) -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "0")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
@@ -228,7 +230,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         </div>
       </div>
     <?php } ?>
-    <!--? 登入錯誤訊息 -->
+    <!--? 登入錯誤訊息(Msg：1)  -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "1")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
@@ -241,7 +243,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         </div>
       </div>
     <?php } ?>
-    <!--? 登入成功訊息 -->
+    <!--? 登入成功訊息(Msg：2)  -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "2")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
@@ -254,7 +256,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         </div>
       </div>
     <?php } ?>
-    <!--? 帳號已註冊訊息 -->
+    <!--? 帳號已註冊訊息(Msg：3)  -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "3")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
@@ -267,7 +269,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         </div>
       </div>
     <?php } ?>
-    <!--? 註冊成功訊息 -->
+    <!--? 註冊成功訊息(Msg：4)  -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "4")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
@@ -280,7 +282,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         </div>
       </div>
     <?php } ?>
-    <!--? 帳號未被註冊訊息 -->
+    <!--? 帳號未被註冊訊息(Msg：5)  -->
     <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "5")) { ?>
       <div class="position-relative me-4">
         <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
@@ -289,6 +291,45 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
             <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5Zm0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z" />
           </svg>
           <div class="fs-5">此帳號未被註冊。</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 發布文章成功訊息(Msg：6)  -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "6")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-check-fill  me-2" viewBox="0 0 16 16">
+            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+            <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
+          </svg>
+          <div class="fs-5">文章發佈成功 !</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 發布文章失敗訊息(Msg：7)  -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "7")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-x-fill me-2" viewBox="0 0 16 16">
+            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+            <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-4.854-1.354a.5.5 0 0 0 0 .708l.647.646-.647.646a.5.5 0 0 0 .708.708l.646-.647.646.647a.5.5 0 0 0 .708-.708l-.647-.646.647-.646a.5.5 0 0 0-.708-.708l-.646.647-.646-.647a.5.5 0 0 0-.708 0Z" />
+          </svg>
+          <div class="fs-5">文章發佈失敗 !</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <?php } ?>
+    <!--? 發布文章未登入訊息(Msg：8)  -->
+    <?php if (isset($_GET["Msg"]) && ($_GET["Msg"] == "8")) { ?>
+      <div class="position-relative me-4">
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show position-absolute top-0 end-0" role="alert" style="width: 350px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-exclamation-fill me-2" viewBox="0 0 16 16">
+            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0Zm0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z" />
+          </svg>
+          <div class="fs-5">您尚未登入，無法發佈文章 !</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>
@@ -342,50 +383,49 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                       </div>
                       <!-- Body -->
                       <div class="modal-body p-5 pt-0">
-                        <form class="" method="post" action="add.php">
+                        <form class="" method="POST" action="addArticles.php">
                           <div class="mb-3 ">
-                            <label for="exampleFormControlInput1" class="form-label">標 題</label>
-                            <input type="form-title" class="form-control bg-light" id="exampleFormControlInput1" minlength="5" maxlength="40" placeholder="請輸入標題... (最少5個字，最高40個字)" required>
+                            <label for="articleTitle" class="form-label">標 題</label>
+                            <input type="form-title" class="form-control bg-light" id="articleTitle" name="articleTitle" minlength="5" maxlength="40" placeholder="請輸入標題... (最少5個字，最高40個字)" required>
                           </div>
                           <div class="row g-2 mb-2">
                             <div class="col-md">
-                              <label for="exampleFormControlInput1" class="form-label">語言看板</label>
+                              <label for="articleLanguages" class="form-label">語言看板</label>
                               <div class="form-floating">
-                                <select class="form-select bg-light" id="floatingSelectGrid" required>
+                                <select class="form-select bg-light" id="articleLanguages" name="articleLanguages" required>
                                   <option selected></option>
                                   <?php
                                   mysqli_data_seek($result_lang, 0);
                                   while ($row_result_lang_ = $result_lang->fetch_assoc()) {
-                                    echo "<option value=' {$row_result_lang_2["language_id"]} '>" . $row_result_lang_["language_name"] . "</option>";
+                                    echo "<option value=' {$row_result_lang_["language_id"]} '>" . $row_result_lang_["language_name"] . "</option>";
                                   }
 
                                   ?>
                                 </select>
-                                <label for="floatingSelectGrid">程式語言看板選擇</label>
+                                <label for="articleTags">程式語言看板選擇</label>
                               </div>
                             </div>
                             <div class="col-md">
-                              <label for="exampleFormControlInput1" class="form-label">文章標籤</label>
+                              <label for="articleTags" class="form-label">文章標籤</label>
                               <div class="form-floating">
-                                <select class="form-select bg-light" id="floatingSelectGrid" required>
+                                <select class="form-select bg-light" id="articleTags" name="articleTags" required>
                                   <option selected></option>
-                                  <?php
+                                  <?php 
                                   while ($row_result_tags = $result_tags->fetch_assoc()) {
-                                    echo "<option value=' {$row_result_lang_2["tag_id"]} '>" . $row_result_tags["tag_name"] . "</option>";
-                                  }
-
-                                  ?>
+                                    echo "<option value=' {$row_result_tags["tag_id"]} '>" . $row_result_tags["tag_name"] . "</option>";
+                                  } ?>
                                 </select>
-                                <label for="floatingSelectGrid">文章標籤選擇</label>
+                                <label for="articleTags">文章標籤選擇</label>
                               </div>
                             </div>
                           </div>
                           <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">內 容</label>
-                            <textarea class="form-control bg-light" id="exampleFormControlTextarea1" rows="3" style="height:400px;" placeholder="請輸入內文... (最少10個字，最高800個字)" minlength="10" maxlength="800" required></textarea>
+                            <label for="articleContent" class="form-label">內 容</label>
+                            <textarea class="form-control bg-light" id="articleContent" name="articleContent" rows="3" style="height:400px;" placeholder="請輸入內文... (最少10個字，最高800個字)" minlength="10" maxlength="800" required></textarea>
                           </div>
                           <!-- Footer -->
                           <div class="modal-footer">
+                            <input type="hidden" id="action" name="action" value="addArticle">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                               <button class="btn btn-secondary me-md-2" type="reset">重 置</button>
                               <button class="btn text-white btn-primary2" type="submit">送 出</button>
