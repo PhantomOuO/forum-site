@@ -82,7 +82,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
       <div class="container">
 
         <!-- 品牌logo -->
-        <a class="navbar-brand text-white" href="#">
+        <a class="navbar-brand text-white fw-bold" href="./index.php">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
             <path d="M6 9a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3A.5.5 0 0 1 6 9zM3.854 4.146a.5.5 0 1 0-.708.708L4.793 6.5 3.146 8.146a.5.5 0 1 0 .708.708l2-2a.5.5 0 0 0 0-.708l-2-2z" />
             <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12z" />
@@ -100,7 +100,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
           <!-- 下拉選項 -->
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
+              <a class="nav-link dropdown-toggle text-white fw-bold" href="home.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">會員中心</a>
               <ul class="dropdown-menu dropdown-menu-end rounded-0 mt-2 bg-primary2" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item text-white fw-bold">
                     <?php
@@ -123,7 +123,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                   }
                   ?>
                 </li>
-                <li><a class="dropdown-item text-white" href="">我的文章</a></li>
+                <li><a class="dropdown-item text-white" href="./updateArticles.php">我的文章</a></li>
                 <li><a class="dropdown-item text-white" href="">收藏文章</a></li>
                 <li><a class="dropdown-item text-white" href="">個人資料</a></li>
               </ul>
@@ -329,7 +329,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
             <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0Zm0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z" />
           </svg>
-          <div class="fs-5">您尚未登入，無法發佈文章 !</div>
+          <div class="fs-5">您尚未登入，無法執行操作 !</div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>
@@ -342,7 +342,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
         <!-- 左側看板有時間補lg以下顯示下拉選單 -->
         <div class="col-lg-2">
           <div class="p-3 rounded-2 bg-light h-100">
-            <div class="h5 text-primary2">看 板 列 表 </div>
+            <div class="h5 text-primary2 fw-bold">看 板 列 表 </div>
             <nav class="nav flex-column ">
               <?php
               while ($row_result_lang = $result_lang->fetch_assoc()) {
@@ -487,7 +487,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Body -->
-                    <div class="modal-body p-5 pt-0" style="height:450px; ">
+                    <div class="modal-body p-5 pt-0" style="height:450px; word-break: keep-all;">
                       <hr>
                       <p class="content fs-5"></p>
                     </div>
