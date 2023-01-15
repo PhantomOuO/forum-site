@@ -123,7 +123,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                   }
                   ?>
                 </li>
-                <li><a class="dropdown-item text-white" href="./updateArticles.php">我的文章</a></li>
+                <li><a class="dropdown-item text-white" href="./myArticles.php">我的文章</a></li>
                 <li><a class="dropdown-item text-white" href="">收藏文章</a></li>
                 <li><a class="dropdown-item text-white" href="">個人資料</a></li>
               </ul>
@@ -410,7 +410,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                               <div class="form-floating">
                                 <select class="form-select bg-light" id="articleTags" name="articleTags" required>
                                   <option selected></option>
-                                  <?php 
+                                  <?php
                                   while ($row_result_tags = $result_tags->fetch_assoc()) {
                                     echo "<option value=' {$row_result_tags["tag_id"]} '>" . $row_result_tags["tag_name"] . "</option>";
                                   } ?>
@@ -441,37 +441,57 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
 
               <!--文章-->
               <div class="col-lg-12 mb-2">
-                <?php while ($row_result_articles = $result_articles_limit->fetch_assoc()) { ?>
-                  <div class="col-md-12">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-150 position-relative">
-                      <div class="col p-4 d-flex flex-column position-static">
-                        <div class="hstack gap-2">
-                          <strong class="d-inline-block mb-2 text-warning">#<?php echo $row_result_articles["article_id"] ?></strong>
-                          <strong class="d-inline-block mb-2 text-primary2">#<?php echo $row_result_articles["language_name"] ?></strong>
-                          <strong class="d-inline-block mb-2 text-primary2">#<?php echo $row_result_articles["tag_name"] ?></strong>
-                          <strong class="d-inline-block mb-2 ms-auto text-primary2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                            </svg>
-                            <?php echo $row_result_articles["username"] ?>
-                          </strong>
-                        </div>
-                        <h5 class="mb-0"><?php echo $row_result_articles["title"] ?></h5>
-                        <p class="card-text mb-auto"><?php echo mb_strimwidth($row_result_articles["content"], 0, 70) . " . . ." ?></p>
-                        <div class="hstack gap-2">
-                          <div class="mb-1 text-muted">創建時間：<?php echo $row_result_articles["created_at"] ?></div>
-                          <div class="mb-1 text-muted ">|</div>
-                          <div class="mb-1 text-muted">最後修改時間：<?php echo $row_result_articles["updated_at"] ?></div>
-                          <a class="stretched-link ms-auto" type="button" href="#" data-bs-toggle="modal" data-bs-target="#showArticle" data-bs-id="<?php echo $row_result_articles["article_id"] ?>" data-bs-lang="<?php echo $row_result_articles["language_name"] ?>" data-bs-tag="<?php echo $row_result_articles["tag_name"] ?>" data-bs-username="<?php echo $row_result_articles["username"] ?>" data-bs-title="<?php echo $row_result_articles["title"] ?>" data-bs-content="<?php echo $row_result_articles["content"] ?>" data-bs-createdAt="<?php echo $row_result_articles["created_at"] ?>" data-bs-updatedAt="<?php echo $row_result_articles["updated_at"] ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand text-black" viewBox="0 0 16 16">
-                              <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-                            </svg>
-                          </a>
+                <?php if (mysqli_num_rows($result_articles_limit) == 0) {
+                  echo "
+                  <div class='vstack gap-3 text-center'>
+                    <div class='bg-body-tertiary '>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-exclamation-octagon-fill text-danger' viewBox='0 0 16 16'>
+                      <path d='M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/>
+                      </svg>
+                    </div>
+                    <div class='bg-body-tertiary'>
+                      <p class='  fs-5 fw-bold'>此看版尚未發佈過文章</p>
+                    </div>
+                  </div>";
+                } else { ?>
+                  <?php while ($row_result_articles = $result_articles_limit->fetch_assoc()) { ?>
+                    <div class="col-md-12">
+                      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-150 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                          <div class="hstack gap-2">
+                            <strong class="d-inline-block mb-2 text-warning">#<?php echo $row_result_articles["article_id"] ?></strong>
+                            <strong class="d-inline-block mb-2 text-primary2">#<?php echo $row_result_articles["language_name"] ?></strong>
+                            <strong class="d-inline-block mb-2 text-primary2">#<?php echo $row_result_articles["tag_name"] ?></strong>
+                            <strong class="d-inline-block mb-2 ms-auto text-primary2">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                              </svg>
+                              <?php
+                              if (isset($_SESSION["loginUserName"]) && ($row_result_articles["username"] == $_SESSION["loginUserName"])) {
+                                echo "我的文章";
+                              } else {
+                                echo $row_result_articles["username"];
+                              }
+                              ?>
+                            </strong>
+                          </div>
+                          <h5 class="mb-0"><?php echo $row_result_articles["title"] ?></h5>
+                          <p class="card-text mb-auto"><?php echo mb_strimwidth($row_result_articles["content"], 0, 70) . " . . ." ?></p>
+                          <div class="hstack gap-2">
+                            <div class="mb-1 text-muted">創建時間：<?php echo $row_result_articles["created_at"] ?></div>
+                            <div class="mb-1 text-muted ">|</div>
+                            <div class="mb-1 text-muted">最後修改時間：<?php echo $row_result_articles["updated_at"] ?></div>
+                            <a class="stretched-link ms-auto" type="button" href="#" data-bs-toggle="modal" data-bs-target="#showArticle" data-bs-id="<?php echo $row_result_articles["article_id"] ?>" data-bs-lang="<?php echo $row_result_articles["language_name"] ?>" data-bs-tag="<?php echo $row_result_articles["tag_name"] ?>" data-bs-username="<?php echo $row_result_articles["username"] ?>" data-bs-title="<?php echo $row_result_articles["title"] ?>" data-bs-content="<?php echo $row_result_articles["content"] ?>" data-bs-createdAt="<?php echo $row_result_articles["created_at"] ?>" data-bs-updatedAt="<?php echo $row_result_articles["updated_at"] ?>">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand text-black" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                              </svg>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                <?php } ?>
+                <?php }
+                } ?>
               </div>
 
               <!--文章彈窗-->
@@ -489,7 +509,7 @@ $totoal_pages = ceil($totoal_records / $pageRow_records);
                     <!-- Body -->
                     <div class="modal-body p-5 pt-0" style="height:450px; word-break: keep-all;">
                       <hr>
-                      <p class="content fs-5"></p>
+                      <p class="content fs-5 text-wrap" style="word-break: break-all;"></p>
                     </div>
                     <!-- Footer -->
                     <div class="modal-footer" style="height:50px;">
